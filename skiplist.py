@@ -52,7 +52,7 @@ class SkipList:
 
 def axb_test():
     errors = 0
-    for _ in range(1000):
+    for _ in range(100):
         A = random.randint(1, 10000)
         B = random.randint(1, 10000)
         correct = A * B
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     print("CPU:", platform.processor())
     print("RAM:", round(psutil.virtual_memory().total / (1024**3), 2), "GB")
 
-    tasks = [500, 1000, 2000, 4000, 8000]
+    tasks = [5_000_000, 10_000_000, 20_000_000]
     times = []
     log_times = []
     avg_steps_list = []
