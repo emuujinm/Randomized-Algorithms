@@ -29,7 +29,6 @@ def quickselect(val, left, right, k):
     pivot = val[right]
 
     i = left - 1
-
     for j in range(left, right):
         if val[j] < pivot:
             i += 1
@@ -52,50 +51,34 @@ if __name__ == "__main__":
     sizes = [10_000 * (2 ** i) for i in range(5)]
     q_times = []
     s_times = []
-    errors = []
 
     for n in sizes:
         val = [random.randint(0, n - 1) for _ in range(n)]
 
-        # QuickSelect хугацаа
+        # QuickSelect
         runtime = 0
         for _ in range(1000):
             tmp = val[:]
             k = random.randint(1, n)
             start = time.time()
             quickselect(tmp, 0, n - 1, k)
-            runtime += (time.time() - start) * 1000
+            runtime += (time.time() - start)
 
-        q_avg = runtime / 1000
+        q_avg = (runtime / 1000) * 1000
         q_times.append(q_avg)
 
-        # QuickSort хугацаа
+        # QuickSort
         tmp = val[:]
         start = time.time()
         quicksort(tmp, 0, len(tmp) - 1)
         s_elapsed = (time.time() - start) * 1000
         s_times.append(s_elapsed)
 
-        # AxB != C алдааны тест
-        error_count = 0
-        for _ in range(1000):
-            A = random.randint(1, 10000)
-            B = random.randint(1, 10000)
-            correct = A * B
-            if random.random() < 0.5:
-                C = correct
-            else:
-                C = correct + random.randint(1, 100)
-            if A * B != C and C == correct:
-                error_count += 1
-        error_rate = error_count / 1000
-        errors.append(error_rate)
-
-        print(f"Оролт = {n}: QuickSelect = {q_avg:.2f}ms, QuickSort = {s_elapsed:.2f}ms, AxB!=C алдаа: {error_rate:.2%}")
+        print(f"Input size = {n}: QuickSelect = {q_avg:.2f}ms, QuickSort = {s_elapsed:.2f}ms")
 
     plt.figure(figsize=(10, 6))
     plt.plot(sizes, q_times, label="QuickSelect", marker='o')
-    plt.plot(sizes, s_times, label="QuickSort", marker='runtime', linestyle='--')
+    plt.plot(sizes, s_times, label="QuickSort", marker='x', linestyle='--')
     plt.xscale("log")
     plt.yscale("log")
     plt.xlabel("Оролт (log scale)")
@@ -106,5 +89,5 @@ if __name__ == "__main__":
     plt.tight_layout()
 
     plt.savefig("quickselect.png")
-
+    
     plt.show()
