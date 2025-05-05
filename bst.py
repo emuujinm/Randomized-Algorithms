@@ -70,7 +70,7 @@ def search(t, key):
 print("CPU:", platform.processor())
 print("RAM:", round(psutil.virtual_memory().total / (1024**3), 2), "GB")
 
-num = [500, 1000, 2000, 4000, 8000]
+num = [5_000_000, 10_000_000, 20_000_000]
 runtime = []
 
 for n in num:
@@ -99,7 +99,7 @@ for n in num:
     logTime = math.log10(runTime + 1e-9)
 
     error = 0
-    for _ in range(1000):
+    for _ in range(100):
         A = random.randint(1, 10000)
         B = random.randint(1, 10000)
         correct_C = A * B
