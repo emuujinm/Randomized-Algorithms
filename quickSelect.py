@@ -48,7 +48,7 @@ if __name__ == "__main__":
     print("CPU:", platform.processor())
     print("RAM:", round(psutil.virtual_memory().total / (1024**3), 2), "GB")
 
-    sizes = [10_000 * (2 ** i) for i in range(5)]
+    sizes = [10_000_000, 20_000_000, 40_000_000, 80_000_000, 160_000_000]
     q_times = []
     s_times = []
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
         # QuickSelect
         runtime = 0
-        for _ in range(1000):
+        for _ in range(100):
             tmp = val[:]
             k = random.randint(1, n)
             start = time.time()
